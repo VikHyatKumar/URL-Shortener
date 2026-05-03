@@ -45,10 +45,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       {/* ── Hero Section ── */}
       <section className="max-w-4xl mx-auto px-4 pt-20 pb-12 text-center">
-        <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-sm font-medium px-4 py-1.5 rounded-full mb-6 animate-fade-in">
-          <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-          Free URL Shortener
-        </div>
+
 
         <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 dark:text-white mb-5 animate-slide-up leading-tight">
           Shorten. Share.{" "}
