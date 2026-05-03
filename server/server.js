@@ -23,6 +23,8 @@ connectDB();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
+  "https://url-shortener-khaki-mu.vercel.app",
+  "https://snap-url-clos.onrender.com",
   ...(process.env.CLIENT_URL
     ? process.env.CLIENT_URL.split(",").map((o) => o.trim().replace(/\/$/, "")) // strip trailing slash + path
     : []),
