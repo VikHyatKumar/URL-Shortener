@@ -16,11 +16,28 @@ const app = express();
 
 connectDB();
 
-// ── Middleware ──────────────────────────────────────────────────────────────
+// ── CORS ─────────────────────────────────────────────────────────────────────
+// Build an allowlist from CLIENT_URL (comma-separated) + localhost fallback.
+// This lets you add multiple Vercel preview URLs without code changes —
+// just update the CLIENT_URL env var on Render: "https://a.vercel.app,https://b.vercel.app"
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  ...(process.env.CLIENT_URL
+    ? process.env.CLIENT_URL.split(",").map((o) => o.trim().replace(/\/$/, "")) // strip trailing slash + path
+    : []),
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (Postman, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
